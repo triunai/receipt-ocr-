@@ -1,19 +1,18 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing import Optional
 
 class Settings(BaseSettings):
     # Load settings from a .env file
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra='ignore')
 
-    # Supabase
-    SUPABASE_URL: str
-    SUPABASE_KEY: str
+    # Supabase - Now Optional so you can run the app without them
+    SUPABASE_URL: Optional[str] = None
+    SUPABASE_KEY: Optional[str] = None
 
-    # Mistral AI
+    # Mistral AI - Still required for the core OCR service
     MISTRAL_API_KEY: str
-    MISTRAL_OCR_MODEL: str = "mistral-ocr-latest"
-    MISTRAL_PARSER_MODEL: str = "mistral-large-latest"
 
-    # JWT Authentication
+    # JWT Authentication - Still needed for auth endpoints if you use them
     SECRET_KEY: str = "your-default-secret-key-if-not-in-env"
     ALGORITHM: str = "HS256"
 
