@@ -1,3 +1,5 @@
-class MistralOCRError(Exception):
+class OCRError(Exception):
     """Custom exception for OCR processing errors."""
-    pass 
+    def __init__(self, message: str):
+        self.message = message
+        super().__init__(self.message) 
